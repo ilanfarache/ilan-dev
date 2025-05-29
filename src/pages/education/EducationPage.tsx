@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { motion } from 'framer-motion';
 import { FaUniversity, FaLaptopCode } from "react-icons/fa"
+import CustomButton from "../../components/CustomButton";
 
 const EducationPage = () => {
     const navigate = useNavigate()
@@ -15,12 +16,8 @@ const EducationPage = () => {
 
     return (
         <div className="h-screen flex items-center justify-center">
-            <button
-                onClick={() => navigate(-1)}
-                className="mt-8 px-6 py-3 bg-cyan-500 shadow-lg shadow-cyan-500/50 text-blue-900 font-bold rounded-full hover:bg-cyan-400 transition absolute top-10 left-10 z-100 cursor-pointer"
-            >
-                {`< Back`}
-            </button>
+            <CustomButton label="< Back" dir="left" onClick={() => navigate('/profile')} />
+
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-10 p-8">
                 <motion.div

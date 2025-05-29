@@ -2,8 +2,15 @@ import { useEffect, useState } from "react"
 
 export const Cursor = () => {
     const [position, setPosition] = useState({ x: 0, y: 0 })
+    const [isMobile, setIsMobile] = useState(false)
 
     useEffect(() => {
+        // Détection mobile
+        const isTouch = window.matchMedia('(pointer: coarse)').matches
+        setIsMobile(isTouch)
+
+        if (isTouch) return // Pas d'écouteur sur mobile
+
         const handleMouseMove = (e: MouseEvent) => {
             setPosition({ x: e.clientX, y: e.clientY })
         }
@@ -13,6 +20,8 @@ export const Cursor = () => {
             window.removeEventListener("mousemove", handleMouseMove)
         }
     }, [])
+
+    if (isMobile) return null // Ne rien afficher sur mobile
 
     return (
         <div

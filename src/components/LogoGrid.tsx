@@ -22,11 +22,11 @@ export default function LogoGrid() {
         TsLogo
     ], []);
     return (
-        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-6 place-items-center mt-10">
+        <div className="grid grid-cols-3  gap-6 place-items-center mt-10">
             {logos.map((Logo, index) => (
                 <Logo
                     key={index}
-                    className={`w-24 h-24 opacity-0 animate-fade-in animate-delay-${index}`}
+                    className={`w-24 max-sm:w-12 h-24 max-sm:h-12 opacity-0 animate-fade-in animate-delay-${index} `}
                 />
             ))}
         </div>
