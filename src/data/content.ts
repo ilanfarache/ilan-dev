@@ -38,7 +38,7 @@ export const profileContent = {
                 },
                 {
                     title: "Internal CRM",
-                    description: "Built and maintained an internal CRM for organization managers. Responsible for layout architecture, API integration, and dynamic UI rendering.",
+                    description: "Built and maintained an internal CRM for organization managers, used to manage members, wallets, activity reports, and team permissions. I was responsible for the overall layout architecture, API integration, and dynamic UI rendering based on role and organization data.",
                     gradient: "from-purple-500 to-pink-500"
                 },
                 {

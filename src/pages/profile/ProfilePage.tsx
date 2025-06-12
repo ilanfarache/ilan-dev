@@ -1,7 +1,9 @@
 import { useNavigate } from "react-router-dom";
 import { motion } from 'framer-motion';
+import { useCallback, useEffect, useState } from 'react';
+import useEmblaCarousel from 'embla-carousel-react';
 import CustomButton from "../../components/CustomButton";
-import { FaAngleDown, FaReact, FaCode, FaUsers, FaRocket, FaMobile, FaLaptopCode } from "react-icons/fa";
+import { FaAngleDown, FaReact, FaCode, FaUsers, FaRocket, FaMobile, FaLaptopCode, FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { SiTypescript, SiTailwindcss, SiNextdotjs, SiMongodb } from "react-icons/si";
 import { profileContent } from "../../data/content";
 
@@ -35,6 +37,41 @@ const scaleIn = {
 
 const ProfilePage = () => {
     const navigate = useNavigate();
+    const [emblaRef, emblaApi] = useEmblaCarousel({ loop: false });
+    const [emblaRef2, emblaApi2] = useEmblaCarousel({ loop: false });
+    const [canScrollPrev, setCanScrollPrev] = useState(false);
+    const [canScrollNext, setCanScrollNext] = useState(false);
+    const [canScrollPrev2, setCanScrollPrev2] = useState(false);
+    const [canScrollNext2, setCanScrollNext2] = useState(false);
+
+    const scrollPrev = useCallback(() => emblaApi && emblaApi.scrollPrev(), [emblaApi]);
+    const scrollNext = useCallback(() => emblaApi && emblaApi.scrollNext(), [emblaApi]);
+    const scrollPrev2 = useCallback(() => emblaApi2 && emblaApi2.scrollPrev(), [emblaApi2]);
+    const scrollNext2 = useCallback(() => emblaApi2 && emblaApi2.scrollNext(), [emblaApi2]);
+
+    const onSelect = useCallback(() => {
+        if (!emblaApi) return;
+        setCanScrollPrev(emblaApi.canScrollPrev());
+        setCanScrollNext(emblaApi.canScrollNext());
+    }, [emblaApi]);
+
+    const onSelect2 = useCallback(() => {
+        if (!emblaApi2) return;
+        setCanScrollPrev2(emblaApi2.canScrollPrev());
+        setCanScrollNext2(emblaApi2.canScrollNext());
+    }, [emblaApi2]);
+
+    useEffect(() => {
+        if (!emblaApi) return;
+        onSelect();
+        emblaApi.on('select', onSelect);
+    }, [emblaApi, onSelect]);
+
+    useEffect(() => {
+        if (!emblaApi2) return;
+        onSelect2();
+        emblaApi2.on('select', onSelect2);
+    }, [emblaApi2, onSelect2]);
 
     const skills = [
         { icon: FaReact, name: "React", color: "text-blue-400" },
@@ -75,10 +112,10 @@ const ProfilePage = () => {
                     <motion.div
                         variants={scaleIn}
                         custom={0}
-                        className="relative z-10 mb-6"
+                        className="relative z-10 mb-4 md:mb-6"
                     >
-                        <div className="w-32 h-32 mx-auto bg-gradient-to-r from-blue-400 to-purple-500 rounded-full flex items-center justify-center mb-6 shadow-2xl">
-                            <FaLaptopCode className="text-4xl text-white" />
+                        <div className="w-20 h-20 md:w-32 md:h-32 mx-auto bg-gradient-to-r from-blue-400 to-purple-500 rounded-full flex items-center justify-center mb-4 md:mb-6 shadow-2xl">
+                            <FaLaptopCode className="text-2xl md:text-4xl text-white" />
                         </div>
                     </motion.div>
 
@@ -175,7 +212,8 @@ const ProfilePage = () => {
                             <p className="text-base md:text-lg lg:text-xl text-blue-300 font-semibold">3.5 Years of Innovation</p>
                         </motion.div>
 
-                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 md:gap-4 mb-4 md:mb-6 px-4">
+                        {/* Desktop Grid */}
+                        <div className="hidden lg:grid grid-cols-2 gap-4 mb-6 px-4">
                             {[
                                 {
                                     icon: FaMobile,
@@ -210,19 +248,95 @@ const ProfilePage = () => {
                                     whileHover={{ y: -5 }}
                                     transition={{ type: "spring", stiffness: 300 }}
                                 >
-                                    <div className="relative p-4 md:p-5 bg-white/10 backdrop-blur-sm rounded-lg md:rounded-xl border border-white/20 hover:border-white/40 transition-all duration-300 shadow-xl hover:shadow-blue-500/20 h-full">
-                                        <div className={`absolute inset-0 bg-gradient-to-r ${item.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-300 rounded-lg md:rounded-xl`}></div>
+                                    <div className="relative p-5 bg-white/10 backdrop-blur-sm rounded-xl border border-white/20 hover:border-white/40 transition-all duration-300 shadow-xl hover:shadow-blue-500/20 h-64">
+                                        <div className={`absolute inset-0 bg-gradient-to-r ${item.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-300 rounded-xl`}></div>
 
                                         <div className="relative z-10">
-                                            <div className={`inline-flex p-1.5 md:p-2 bg-gradient-to-r ${item.gradient} rounded-lg mb-2 md:mb-3`}>
-                                                <item.icon className="text-base md:text-lg text-white" />
+                                            <div className={`inline-flex p-2 bg-gradient-to-r ${item.gradient} rounded-lg mb-3`}>
+                                                <item.icon className="text-lg text-white" />
                                             </div>
-                                            <h3 className="text-base md:text-lg font-bold text-white mb-2 md:mb-3">{item.title}</h3>
-                                            <p className="text-gray-300 leading-relaxed text-xs md:text-sm">{item.description}</p>
+                                            <h3 className="text-lg font-bold text-white mb-3">{item.title}</h3>
+                                            <p className="text-gray-300 leading-relaxed text-sm">{item.description}</p>
                                         </div>
                                     </div>
                                 </motion.div>
                             ))}
+                        </div>
+
+                        {/* Mobile Carousel */}
+                        <div className="lg:hidden relative mb-6">
+                            <div className="overflow-hidden" ref={emblaRef}>
+                                <div className="flex">
+                                    {[
+                                        {
+                                            icon: FaMobile,
+                                            title: "Ordering Platform",
+                                            description: "Built a full-featured ordering platform from scratch with React and Material-UI. Delivered responsive, pixel-perfect UI with animations.",
+                                            gradient: "from-blue-500 to-cyan-500"
+                                        },
+                                        {
+                                            icon: FaUsers,
+                                            title: "Internal CRM",
+                                            description: "Built and maintained an internal CRM for organization managers, used to manage members, wallets, activity reports, and team permissions. I was responsible for the overall layout architecture, API integration, and dynamic UI rendering based on role and organization data.",
+                                            gradient: "from-purple-500 to-pink-500"
+                                        },
+                                        {
+                                            icon: FaCode,
+                                            title: "Development Excellence",
+                                            description: "Implemented multilingual support with i18next, unit tests with Vitest, and React Developer Tools for optimization.",
+                                            gradient: "from-green-500 to-teal-500"
+                                        },
+                                        {
+                                            icon: FaUsers,
+                                            title: "Agile Collaboration",
+                                            description: "Worked in fully Agile team (2-week sprints, Jira), collaborating with PMs, QA testers, and back-end developers.",
+                                            gradient: "from-orange-500 to-red-500"
+                                        }
+                                    ].map((item, index) => (
+                                        <div key={index} className="flex-[0_0_80%] min-w-0 px-2">
+                                            <motion.div
+                                                variants={scaleIn}
+                                                custom={index}
+                                                className="group relative overflow-hidden"
+                                                whileHover={{ y: -5 }}
+                                                transition={{ type: "spring", stiffness: 300 }}
+                                            >
+                                                <div className="relative p-4 bg-white/10 backdrop-blur-sm rounded-lg border border-white/20 hover:border-white/40 transition-all duration-300 shadow-xl hover:shadow-blue-500/20 h-48">
+                                                    <div className={`absolute inset-0 bg-gradient-to-r ${item.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-300 rounded-lg`}></div>
+
+                                                    <div className="relative z-10 h-full flex flex-col">
+                                                        <div className={`inline-flex p-1.5 bg-gradient-to-r ${item.gradient} rounded-lg mb-2 flex-shrink-0`}>
+                                                            <item.icon className="text-base text-white" />
+                                                        </div>
+                                                        <h3 className="text-base font-bold text-white mb-2 flex-shrink-0">{item.title}</h3>
+                                                        <div className="flex-1 overflow-y-auto">
+                                                            <p className="text-gray-300 leading-relaxed text-xs pr-2">{item.description}</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </motion.div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+
+                            {/* Carousel Controls */}
+                            <div className="flex justify-center gap-4 mt-4">
+                                <button
+                                    onClick={scrollPrev}
+                                    disabled={!canScrollPrev}
+                                    className="p-2 bg-white/10 rounded-full border border-white/20 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-white/20 transition-colors"
+                                >
+                                    <FaChevronLeft className="text-white text-sm" />
+                                </button>
+                                <button
+                                    onClick={scrollNext}
+                                    disabled={!canScrollNext}
+                                    className="p-2 bg-white/10 rounded-full border border-white/20 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-white/20 transition-colors"
+                                >
+                                    <FaChevronRight className="text-white text-sm" />
+                                </button>
+                            </div>
                         </div>
 
                         <motion.div
@@ -271,7 +385,8 @@ const ProfilePage = () => {
                             <p className="text-base md:text-lg lg:text-xl text-purple-300 font-semibold">Adopt a Contractor</p>
                         </motion.div>
 
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mb-6 md:mb-8 px-4">
+                        {/* Desktop Grid */}
+                        <div className="hidden md:grid grid-cols-3 gap-6 mb-8 px-4">
                             {[
                                 {
                                     icon: SiNextdotjs,
@@ -300,17 +415,85 @@ const ProfilePage = () => {
                                     whileHover={{ y: -5, scale: 1.02 }}
                                     transition={{ duration: 0.2 }}
                                 >
-                                    <div className="h-full p-4 md:p-6 bg-white/10 rounded-lg md:rounded-xl border border-white/20 hover:border-purple-400/50 transition-all duration-200 shadow-xl">
+                                    <div className="h-64 p-6 bg-white/10 rounded-xl border border-white/20 hover:border-purple-400/50 transition-all duration-200 shadow-xl">
                                         <div className="flex flex-col items-center text-center h-full">
-                                            <div className="p-2 md:p-3 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg md:rounded-xl mb-3 md:mb-4">
-                                                <item.icon className={`text-xl md:text-2xl ${item.color}`} />
+                                            <div className="p-3 bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl mb-4">
+                                                <item.icon className={`text-2xl ${item.color}`} />
                                             </div>
-                                            <h3 className="text-base md:text-lg font-bold text-white mb-2 md:mb-3">{item.title}</h3>
-                                            <p className="text-gray-300 leading-relaxed text-xs md:text-sm flex-grow">{item.description}</p>
+                                            <h3 className="text-lg font-bold text-white mb-3">{item.title}</h3>
+                                            <p className="text-gray-300 leading-relaxed text-sm flex-grow">{item.description}</p>
                                         </div>
                                     </div>
                                 </motion.div>
                             ))}
+                        </div>
+
+                        {/* Mobile Carousel */}
+                        <div className="md:hidden relative mb-6">
+                            <div className="overflow-hidden" ref={emblaRef2}>
+                                <div className="flex">
+                                    {[
+                                        {
+                                            icon: SiNextdotjs,
+                                            title: "Next.js Development",
+                                            description: "Contributed to the development of the company’s main website by building several key pages and components using Next.js and CSS Modules.",
+                                            color: "text-gray-200"
+                                        },
+                                        {
+                                            icon: FaMobile,
+                                            title: "Responsive Design",
+                                            description: "Translated UI/UX designs into fully responsive, pixel-perfect web pages using CSS Modules.",
+                                            color: "text-blue-400"
+                                        },
+                                        {
+                                            icon: FaUsers,
+                                            title: "Business Logic",
+                                            description: "Collaborated with PM to implement business logic, user flows, and dynamic routing for SEO.",
+                                            color: "text-purple-400"
+                                        }
+                                    ].map((item, index) => (
+                                        <div key={index} className="flex-[0_0_80%] min-w-0 px-2">
+                                            <motion.div
+                                                variants={fadeInUp}
+                                                custom={index + 1}
+                                                className="group relative"
+                                                whileHover={{ y: -5, scale: 1.02 }}
+                                                transition={{ duration: 0.2 }}
+                                            >
+                                                <div className="h-48 p-4 bg-white/10 rounded-lg border border-white/20 hover:border-purple-400/50 transition-all duration-200 shadow-xl">
+                                                    <div className="flex flex-col items-center text-center h-full">
+                                                        <div className="p-2 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg mb-3 flex-shrink-0">
+                                                            <item.icon className={`text-xl ${item.color}`} />
+                                                        </div>
+                                                        <h3 className="text-base font-bold text-white mb-2 flex-shrink-0">{item.title}</h3>
+                                                        <div className="flex-1 overflow-y-auto w-full">
+                                                            <p className="text-gray-300 leading-relaxed text-xs pr-2">{item.description}</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </motion.div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+
+                            {/* Carousel Controls */}
+                            <div className="flex justify-center gap-4 mt-4">
+                                <button
+                                    onClick={scrollPrev2}
+                                    disabled={!canScrollPrev2}
+                                    className="p-2 bg-white/10 rounded-full border border-white/20 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-white/20 transition-colors"
+                                >
+                                    <FaChevronLeft className="text-white text-sm" />
+                                </button>
+                                <button
+                                    onClick={scrollNext2}
+                                    disabled={!canScrollNext2}
+                                    className="p-2 bg-white/10 rounded-full border border-white/20 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-white/20 transition-colors"
+                                >
+                                    <FaChevronRight className="text-white text-sm" />
+                                </button>
+                            </div>
                         </div>
 
                         <motion.div
