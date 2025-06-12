@@ -2,6 +2,8 @@ import { useNavigate } from "react-router-dom";
 import { motion } from 'framer-motion';
 import Image from '../../assets/profile.png';
 import { FaCode, FaRocket, FaArrowRight, FaGithub, FaLinkedin } from "react-icons/fa";
+import { homeContent, socialLinks } from "../../data/content";
+
 
 // Import des logos pour les faire flotter
 import ReactLogo from '../../assets/svg/react-logo.svg?react';
@@ -40,9 +42,9 @@ const HomePage = () => {
         }),
     };
 
-    const socialLinks = [
-        { icon: FaGithub, href: "https://github.com/ilanfarache", label: "GitHub" },
-        { icon: FaLinkedin, href: "https://www.linkedin.com/in/ilan-farache/", label: "LinkedIn" },
+    const socialLinksWithIcons = [
+        { icon: FaGithub, href: socialLinks[0].url, label: socialLinks[0].label },
+        { icon: FaLinkedin, href: socialLinks[1].url, label: socialLinks[1].label },
     ];
 
     // Configuration des logos flottants
@@ -128,7 +130,7 @@ const HomePage = () => {
                         custom={1}
                         className="text-3xl md:text-5xl font-bold bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent uppercase tracking-wider mb-4"
                     >
-                        Welcome to My Profile
+                        {homeContent.hero.title}
                     </motion.h1>
 
                     <motion.div
@@ -137,11 +139,11 @@ const HomePage = () => {
                         className="mb-6"
                     >
                         <h2 className="text-xl md:text-3xl font-semibold text-white mb-3">
-                            Ilan Farache
+                            {homeContent.hero.name}
                         </h2>
                         <div className="flex items-center justify-center gap-3 text-base md:text-xl text-blue-300">
                             <FaCode className="text-blue-400" />
-                            <span className="font-medium">Front-End Developer</span>
+                            <span className="font-medium">{homeContent.hero.role}</span>
                             <FaRocket className="text-purple-400" />
                         </div>
                     </motion.div>
@@ -151,9 +153,7 @@ const HomePage = () => {
                         custom={3}
                         className="text-base md:text-lg text-gray-300 max-w-2xl mx-auto leading-relaxed mb-6"
                     >
-                        Passionate developer with <span className="text-blue-400 font-semibold">3.5+ years</span> of experience
-                        crafting modern, responsive web applications.
-                        Specialized in <span className="text-purple-400 font-semibold">React, TypeScript, and innovative UI/UX</span>.
+                        {homeContent.hero.description}
                     </motion.p>
 
                     {/* CTA Button */}
@@ -170,7 +170,7 @@ const HomePage = () => {
                             transition={{ type: "spring", stiffness: 400, damping: 25 }}
                         >
                             <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                            <span className="relative z-10">View My Resume</span>
+                            <span className="relative z-10">{homeContent.hero.cta}</span>
                             <FaArrowRight className="relative z-10 group-hover:translate-x-1 transition-transform duration-300" />
                         </motion.button>
                     </motion.div>
@@ -181,7 +181,7 @@ const HomePage = () => {
                         custom={5}
                         className="flex justify-center gap-6"
                     >
-                        {socialLinks.map((social, index) => (
+                        {socialLinksWithIcons.map((social, index) => (
                             <motion.a
                                 key={social.label}
                                 href={social.href}
@@ -202,6 +202,8 @@ const HomePage = () => {
 
 
             </motion.div>
+
+
         </div>
     );
 }

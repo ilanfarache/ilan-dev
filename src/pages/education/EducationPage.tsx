@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { FaUniversity, FaLaptopCode, FaGraduationCap, FaBook, FaCode, FaAward } from "react-icons/fa";
 import { SiReact, SiNodedotjs, SiJavascript, SiMongodb } from "react-icons/si";
 import CustomButton from "../../components/CustomButton";
+import { educationContent, navigation } from "../../data/content";
 
 const EducationPage = () => {
     const navigate = useNavigate();
@@ -40,7 +41,7 @@ const EducationPage = () => {
 
     return (
         <>
-            <CustomButton label="Back" dir="left" onClick={() => navigate('/profile')} />
+            <CustomButton label={navigation.buttons.back} dir="left" onClick={() => navigate('/profile')} />
 
             <div className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-blue-900 relative">
                 {/* Background effects */}
@@ -73,10 +74,10 @@ const EducationPage = () => {
                             <FaGraduationCap className="text-3xl text-white" />
                         </div>
                         <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-purple-400 via-blue-400 to-cyan-400 bg-clip-text text-transparent uppercase tracking-wider mb-4">
-                            Education
+                            {educationContent.hero.title}
                         </h1>
                         <p className="text-lg md:text-xl text-gray-300">
-                            Academic foundation and professional development
+                            {educationContent.hero.subtitle}
                         </p>
                     </motion.div>
 

@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import CustomButton from "../../components/CustomButton";
 import { FaAngleDown, FaReact, FaCode, FaUsers, FaRocket, FaMobile, FaLaptopCode } from "react-icons/fa";
 import { SiTypescript, SiTailwindcss, SiNextdotjs, SiMongodb } from "react-icons/si";
+import { profileContent } from "../../data/content";
 
 const fadeInUp = {
     hidden: { opacity: 0, y: 30 },
@@ -86,7 +87,7 @@ const ProfilePage = () => {
                         custom={1}
                         className="text-3xl md:text-6xl font-bold bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent uppercase tracking-wider"
                     >
-                        My Experiences
+                        {profileContent.hero.title}
                     </motion.h1>
 
                     <motion.div
