@@ -66,8 +66,8 @@ const HomePage = () => {
                 <div className="absolute top-3/4 left-3/4 w-64 h-64 bg-cyan-500/10 rounded-full blur-xl"></div>
             </div>
 
-            {/* Logos flottants */}
-            <div className="absolute inset-0 pointer-events-none">
+            {/* Logos flottants - Hidden on mobile */}
+            <div className="absolute inset-0 pointer-events-none hidden md:block">
                 {floatingLogos.map((item, index) => (
                     <motion.div
                         key={index}
@@ -89,13 +89,13 @@ const HomePage = () => {
                             ease: "easeInOut"
                         }}
                     >
-                        <item.Logo className="w-16 h-16 md:w-20 md:h-20 text-white/20 hover:text-white/40 transition-colors duration-300" />
+                        <item.Logo className="w-16 h-16 lg:w-20 lg:h-20 text-white/20 hover:text-white/40 transition-colors duration-300" />
                     </motion.div>
                 ))}
             </div>
 
             <motion.div
-                className="relative z-10 flex flex-col items-center justify-center h-full text-white font-mono text-center px-4 py-20"
+                className="relative z-10 flex flex-col items-center justify-center h-full text-white font-mono text-center px-4 py-8 md:py-20"
                 initial="hidden"
                 animate="visible"
                 variants={{
@@ -128,7 +128,7 @@ const HomePage = () => {
                     <motion.h1
                         variants={fadeInUp}
                         custom={1}
-                        className="text-3xl md:text-5xl font-bold bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent uppercase tracking-wider mb-4"
+                        className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent uppercase tracking-wider mb-3 md:mb-4"
                     >
                         {homeContent.hero.title}
                     </motion.h1>
@@ -136,12 +136,12 @@ const HomePage = () => {
                     <motion.div
                         variants={fadeInUp}
                         custom={2}
-                        className="mb-6"
+                        className="mb-4 md:mb-6"
                     >
-                        <h2 className="text-xl md:text-3xl font-semibold text-white mb-3">
+                        <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold text-white mb-2 md:mb-3">
                             {homeContent.hero.name}
                         </h2>
-                        <div className="flex items-center justify-center gap-3 text-base md:text-xl text-blue-300">
+                        <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-3 text-sm sm:text-base md:text-xl text-blue-300">
                             <FaCode className="text-blue-400" />
                             <span className="font-medium">{homeContent.hero.role}</span>
                             <FaRocket className="text-purple-400" />
@@ -151,7 +151,7 @@ const HomePage = () => {
                     <motion.p
                         variants={fadeInUp}
                         custom={3}
-                        className="text-base md:text-lg text-gray-300 max-w-2xl mx-auto leading-relaxed mb-6"
+                        className="text-sm sm:text-base md:text-lg text-gray-300 max-w-xs sm:max-w-md md:max-w-2xl mx-auto leading-relaxed mb-4 md:mb-6 px-2"
                     >
                         {homeContent.hero.description}
                     </motion.p>
@@ -160,18 +160,18 @@ const HomePage = () => {
                     <motion.div
                         variants={scaleIn}
                         custom={4}
-                        className="mb-8"
+                        className="mb-6 md:mb-8"
                     >
                         <motion.button
                             onClick={() => navigate('/profile')}
-                            className="group relative inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-600 rounded-2xl text-white font-semibold text-lg shadow-2xl hover:shadow-blue-500/25 transition-all duration-300 overflow-hidden"
+                            className="group relative inline-flex items-center gap-2 md:gap-3 px-6 md:px-8 py-3 md:py-4 bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl md:rounded-2xl text-white font-semibold text-base md:text-lg shadow-2xl hover:shadow-blue-500/25 transition-all duration-300 overflow-hidden"
                             whileHover={{ scale: 1.05, y: -2 }}
                             whileTap={{ scale: 0.98 }}
                             transition={{ type: "spring", stiffness: 400, damping: 25 }}
                         >
                             <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                             <span className="relative z-10">{homeContent.hero.cta}</span>
-                            <FaArrowRight className="relative z-10 group-hover:translate-x-1 transition-transform duration-300" />
+                            <FaArrowRight className="relative z-10 group-hover:translate-x-1 transition-transform duration-300 text-sm md:text-base" />
                         </motion.button>
                     </motion.div>
 
@@ -179,7 +179,7 @@ const HomePage = () => {
                     <motion.div
                         variants={fadeInUp}
                         custom={5}
-                        className="flex justify-center gap-6"
+                        className="flex justify-center gap-4 md:gap-6"
                     >
                         {socialLinksWithIcons.map((social, index) => (
                             <motion.a
@@ -189,11 +189,11 @@ const HomePage = () => {
                                 rel="noopener noreferrer"
                                 variants={scaleIn}
                                 custom={index + 6}
-                                className="group p-4 bg-white/10 backdrop-blur-sm rounded-xl border border-white/20 hover:border-blue-400/50 transition-all duration-300 hover:bg-white/20"
+                                className="group p-3 md:p-4 bg-white/10 backdrop-blur-sm rounded-lg md:rounded-xl border border-white/20 hover:border-blue-400/50 transition-all duration-300 hover:bg-white/20"
                                 whileHover={{ y: -5, scale: 1.1 }}
                                 transition={{ type: "spring", stiffness: 400 }}
                             >
-                                <social.icon className="text-2xl text-gray-300 group-hover:text-blue-400 transition-colors duration-300" />
+                                <social.icon className="text-xl md:text-2xl text-gray-300 group-hover:text-blue-400 transition-colors duration-300" />
                             </motion.a>
                         ))}
                     </motion.div>

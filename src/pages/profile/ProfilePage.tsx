@@ -85,7 +85,7 @@ const ProfilePage = () => {
                     <motion.h1
                         variants={fadeInUp}
                         custom={1}
-                        className="text-3xl md:text-6xl font-bold bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent uppercase tracking-wider"
+                        className="text-2xl sm:text-3xl md:text-4xl lg:text-6xl font-bold bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent uppercase tracking-wider"
                     >
                         {profileContent.hero.title}
                     </motion.h1>
@@ -93,13 +93,13 @@ const ProfilePage = () => {
                     <motion.div
                         variants={fadeInUp}
                         custom={2}
-                        className="mt-8 max-w-4xl"
+                        className="mt-6 md:mt-8 max-w-xs sm:max-w-lg md:max-w-4xl px-4"
                     >
-                        <p className="text-lg md:text-2xl text-gray-300 leading-relaxed mb-4">
+                        <p className="text-sm sm:text-base md:text-lg lg:text-2xl text-gray-300 leading-relaxed mb-3 md:mb-4">
                             Front-end developer with <span className="text-blue-400 font-semibold">3.5+ years</span> of experience building modern,
                             responsive web applications using React, TypeScript, Redux, and Tailwind.
                         </p>
-                        <p className="text-lg md:text-xl text-gray-400 leading-relaxed">
+                        <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-400 leading-relaxed">
                             Strong background in UI/UX collaboration, REST API integration, and agile team environments.
                             Proficient with CI/CD and testing.
                         </p>
@@ -108,19 +108,19 @@ const ProfilePage = () => {
                     <motion.div
                         variants={fadeInUp}
                         custom={3}
-                        className="mt-8 flex flex-wrap justify-center gap-4"
+                        className="mt-6 md:mt-8 flex flex-wrap justify-center gap-2 md:gap-4 px-4"
                     >
                         {skills.map((skill, index) => (
                             <motion.div
                                 key={skill.name}
                                 variants={scaleIn}
                                 custom={index}
-                                className="flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-2 border border-white/20"
+                                className="flex items-center gap-1 md:gap-2 bg-white/10 backdrop-blur-sm rounded-full px-3 md:px-4 py-1.5 md:py-2 border border-white/20"
                                 whileHover={{ scale: 1.1, y: -5 }}
                                 transition={{ type: "spring", stiffness: 300 }}
                             >
-                                <skill.icon className={`text-xl ${skill.color}`} />
-                                <span className="text-sm font-medium">{skill.name}</span>
+                                <skill.icon className={`text-base md:text-xl ${skill.color}`} />
+                                <span className="text-xs md:text-sm font-medium">{skill.name}</span>
                             </motion.div>
                         ))}
                     </motion.div>
@@ -164,18 +164,18 @@ const ProfilePage = () => {
                         <motion.div
                             variants={fadeInUp}
                             custom={0}
-                            className="text-center mb-8"
+                            className="text-center mb-6 md:mb-8 px-4"
                         >
-                            <div className="inline-flex items-center gap-3 mb-4">
-                                <FaRocket className="text-2xl md:text-3xl text-blue-400" />
-                                <h2 className="text-xl md:text-4xl font-bold uppercase bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+                            <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-3 mb-3 md:mb-4">
+                                <FaRocket className="text-xl md:text-2xl lg:text-3xl text-blue-400" />
+                                <h2 className="text-lg sm:text-xl md:text-2xl lg:text-4xl font-bold uppercase bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent text-center">
                                     Front-End Developer at Goodi
                                 </h2>
                             </div>
-                            <p className="text-lg md:text-xl text-blue-300 font-semibold">3.5 Years of Innovation</p>
+                            <p className="text-base md:text-lg lg:text-xl text-blue-300 font-semibold">3.5 Years of Innovation</p>
                         </motion.div>
 
-                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-6">
+                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 md:gap-4 mb-4 md:mb-6 px-4">
                             {[
                                 {
                                     icon: FaMobile,
@@ -210,15 +210,15 @@ const ProfilePage = () => {
                                     whileHover={{ y: -5 }}
                                     transition={{ type: "spring", stiffness: 300 }}
                                 >
-                                    <div className="relative p-5 bg-white/10 backdrop-blur-sm rounded-xl border border-white/20 hover:border-white/40 transition-all duration-300 shadow-xl hover:shadow-blue-500/20 h-full">
-                                        <div className={`absolute inset-0 bg-gradient-to-r ${item.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-300 rounded-xl`}></div>
+                                    <div className="relative p-4 md:p-5 bg-white/10 backdrop-blur-sm rounded-lg md:rounded-xl border border-white/20 hover:border-white/40 transition-all duration-300 shadow-xl hover:shadow-blue-500/20 h-full">
+                                        <div className={`absolute inset-0 bg-gradient-to-r ${item.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-300 rounded-lg md:rounded-xl`}></div>
 
                                         <div className="relative z-10">
-                                            <div className={`inline-flex p-2 bg-gradient-to-r ${item.gradient} rounded-lg mb-3`}>
-                                                <item.icon className="text-lg text-white" />
+                                            <div className={`inline-flex p-1.5 md:p-2 bg-gradient-to-r ${item.gradient} rounded-lg mb-2 md:mb-3`}>
+                                                <item.icon className="text-base md:text-lg text-white" />
                                             </div>
-                                            <h3 className="text-lg font-bold text-white mb-3">{item.title}</h3>
-                                            <p className="text-gray-300 leading-relaxed text-sm">{item.description}</p>
+                                            <h3 className="text-base md:text-lg font-bold text-white mb-2 md:mb-3">{item.title}</h3>
+                                            <p className="text-gray-300 leading-relaxed text-xs md:text-sm">{item.description}</p>
                                         </div>
                                     </div>
                                 </motion.div>
@@ -260,18 +260,18 @@ const ProfilePage = () => {
                         <motion.div
                             variants={fadeInUp}
                             custom={0}
-                            className="text-center mb-12"
+                            className="text-center mb-8 md:mb-12 px-4"
                         >
-                            <div className="inline-flex items-center gap-3 mb-4">
-                                <SiNextdotjs className="text-2xl md:text-3xl text-gray-200" />
-                                <h2 className="text-xl md:text-4xl font-bold uppercase bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                            <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-3 mb-3 md:mb-4">
+                                <SiNextdotjs className="text-xl md:text-2xl lg:text-3xl text-gray-200" />
+                                <h2 className="text-lg sm:text-xl md:text-2xl lg:text-4xl font-bold uppercase bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent text-center">
                                     Full Stack Developer
                                 </h2>
                             </div>
-                            <p className="text-lg md:text-xl text-purple-300 font-semibold">Adopt a Contractor</p>
+                            <p className="text-base md:text-lg lg:text-xl text-purple-300 font-semibold">Adopt a Contractor</p>
                         </motion.div>
 
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mb-6 md:mb-8 px-4">
                             {[
                                 {
                                     icon: SiNextdotjs,
@@ -300,13 +300,13 @@ const ProfilePage = () => {
                                     whileHover={{ y: -5, scale: 1.02 }}
                                     transition={{ duration: 0.2 }}
                                 >
-                                    <div className="h-full p-6 bg-white/10 rounded-xl border border-white/20 hover:border-purple-400/50 transition-all duration-200 shadow-xl">
+                                    <div className="h-full p-4 md:p-6 bg-white/10 rounded-lg md:rounded-xl border border-white/20 hover:border-purple-400/50 transition-all duration-200 shadow-xl">
                                         <div className="flex flex-col items-center text-center h-full">
-                                            <div className="p-3 bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl mb-4">
-                                                <item.icon className={`text-2xl ${item.color}`} />
+                                            <div className="p-2 md:p-3 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg md:rounded-xl mb-3 md:mb-4">
+                                                <item.icon className={`text-xl md:text-2xl ${item.color}`} />
                                             </div>
-                                            <h3 className="text-lg font-bold text-white mb-3">{item.title}</h3>
-                                            <p className="text-gray-300 leading-relaxed text-sm flex-grow">{item.description}</p>
+                                            <h3 className="text-base md:text-lg font-bold text-white mb-2 md:mb-3">{item.title}</h3>
+                                            <p className="text-gray-300 leading-relaxed text-xs md:text-sm flex-grow">{item.description}</p>
                                         </div>
                                     </div>
                                 </motion.div>

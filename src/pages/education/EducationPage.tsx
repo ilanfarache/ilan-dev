@@ -51,7 +51,7 @@ const EducationPage = () => {
                 </div>
 
                 <motion.div
-                    className="relative z-10 flex flex-col items-center justify-center min-h-screen px-4 py-20"
+                    className="relative z-10 flex flex-col items-center justify-center min-h-screen px-4 py-8 md:py-20"
                     initial="hidden"
                     animate="visible"
                     variants={{
@@ -68,21 +68,21 @@ const EducationPage = () => {
                     <motion.div
                         variants={fadeInUp}
                         custom={0}
-                        className="text-center mb-16"
+                        className="text-center mb-8 md:mb-16"
                     >
-                        <div className="w-24 h-24 mx-auto bg-gradient-to-r from-purple-400 to-blue-500 rounded-full flex items-center justify-center mb-6 shadow-2xl">
-                            <FaGraduationCap className="text-3xl text-white" />
+                        <div className="w-16 h-16 md:w-24 md:h-24 mx-auto bg-gradient-to-r from-purple-400 to-blue-500 rounded-full flex items-center justify-center mb-4 md:mb-6 shadow-2xl">
+                            <FaGraduationCap className="text-2xl md:text-3xl text-white" />
                         </div>
-                        <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-purple-400 via-blue-400 to-cyan-400 bg-clip-text text-transparent uppercase tracking-wider mb-4">
+                        <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-6xl font-bold bg-gradient-to-r from-purple-400 via-blue-400 to-cyan-400 bg-clip-text text-transparent uppercase tracking-wider mb-3 md:mb-4">
                             {educationContent.hero.title}
                         </h1>
-                        <p className="text-lg md:text-xl text-gray-300">
+                        <p className="text-base md:text-lg lg:text-xl text-gray-300 px-4">
                             {educationContent.hero.subtitle}
                         </p>
                     </motion.div>
 
                     {/* Education Cards */}
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto mb-16">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 max-w-6xl mx-auto mb-8 md:mb-16">
                         {/* University Card */}
                         <motion.div
                             variants={scaleIn}
@@ -91,20 +91,20 @@ const EducationPage = () => {
                             whileHover={{ y: -5 }}
                             transition={{ duration: 0.2 }}
                         >
-                            <div className="relative p-8 bg-white/10 rounded-2xl border border-white/20 hover:border-blue-400/50 transition-colors duration-200 shadow-xl h-full">
-                                <div className="absolute inset-0 bg-gradient-to-r from-blue-500/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-200 rounded-2xl"></div>
+                            <div className="relative p-6 md:p-8 bg-white/10 rounded-xl md:rounded-2xl border border-white/20 hover:border-blue-400/50 transition-colors duration-200 shadow-xl h-full">
+                                <div className="absolute inset-0 bg-gradient-to-r from-blue-500/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-200 rounded-xl md:rounded-2xl"></div>
 
                                 <div className="relative z-10 text-center">
-                                    <div className="inline-flex p-4 bg-gradient-to-r from-blue-500 to-purple-500 rounded-2xl mb-6">
-                                        <FaUniversity className="text-3xl text-white" />
+                                    <div className="inline-flex p-3 md:p-4 bg-gradient-to-r from-blue-500 to-purple-500 rounded-xl md:rounded-2xl mb-4 md:mb-6">
+                                        <FaUniversity className="text-2xl md:text-3xl text-white" />
                                     </div>
-                                    <h3 className="text-2xl font-bold text-white mb-3">
+                                    <h3 className="text-lg md:text-2xl font-bold text-white mb-2 md:mb-3">
                                         B.Sc. Information System Management
                                     </h3>
-                                    <p className="text-lg text-blue-300 font-semibold mb-2">
+                                    <p className="text-base md:text-lg text-blue-300 font-semibold mb-1 md:mb-2">
                                         Netanya Academic College
                                     </p>
-                                    <p className="text-gray-400 mb-6">2016 – 2019</p>
+                                    <p className="text-sm md:text-base text-gray-400 mb-4 md:mb-6">2016 – 2019</p>
 
                                     <div className="space-y-3">
                                         <div className="flex items-center gap-3 text-gray-300">
